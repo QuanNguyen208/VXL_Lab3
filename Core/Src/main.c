@@ -24,6 +24,8 @@
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
 #include "button.h"
+#include "fsm.h"
+#include "global.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -95,11 +97,38 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
+  state = 0;
+  int led_idx = 0;
+  int index = 0;
+  setTimer0(1000);
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  if (timer0_flag == 1) {
+	  		  switch (led_idx) {
+	  			  case 0:
+	  				  led_idx++;
+	  				  break;
+	  		  	  case 1:
+	  		  		  index = 1;
+	  		  		  update7SEG(index);
+	  		  		  setTimer0(500);
+	  		  		  led_idx = 2;
+	  		  		  break;
+	  		  	  case 2:
+	  		  		  led_idx++;
+	  		  		  break;
+	  		  	  case 3:
+	  		  		  index = 2;
+	  		  		  update7SEG(index);
+	  		  		  setTimer0(500);
+	  		  		  led_idx = 0;
+	  		  		  break;
+	  		  	  default:
+	  		  		  break;
+	  		  }
+	  	  }
+	  	  fsm_run();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
