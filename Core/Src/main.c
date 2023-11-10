@@ -105,30 +105,30 @@ int main(void)
   {
     /* USER CODE END WHILE */
 	  if (timer0_flag == 1) {
-	  		  switch (led_idx) {
-	  			  case 0:
-	  				  led_idx++;
-	  				  break;
-	  		  	  case 1:
-	  		  		  index = 1;
-	  		  		  update7SEG(index);
-	  		  		  setTimer0(500);
-	  		  		  led_idx = 2;
-	  		  		  break;
-	  		  	  case 2:
-	  		  		  led_idx++;
-	  		  		  break;
-	  		  	  case 3:
-	  		  		  index = 2;
-	  		  		  update7SEG(index);
-	  		  		  setTimer0(500);
-	  		  		  led_idx = 0;
-	  		  		  break;
-	  		  	  default:
-	  		  		  break;
-	  		  }
-	  	  }
-	  	  fsm_run();
+	  	  switch (led_idx) {
+	  	  	case 0:
+	  	  		led_idx++;
+	  	  		break;
+	  	  	case 1:
+	  	  		index = 1;
+	  	  		update7SEG(index);
+	  	  		setTimer0(500);
+	  	  		led_idx = 2;
+	  	  		break;
+	  	  	case 2:
+	  	  		led_idx++;
+	  	  		break;
+	  	  	case 3:
+	  	  		index = 2;
+	  	  		update7SEG(index);
+	  	  		setTimer0(500);
+	  	  		led_idx = 0;
+	  	  		break;
+	  	    default:
+	  	  		break;
+	  	  		  }
+	  	  	  }
+	  fsm_run();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
