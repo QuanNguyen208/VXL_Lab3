@@ -5,7 +5,6 @@
  *      Author: Admin
  */
 
-
 #include "fsm.h"
 
 int total_time = 0;
@@ -282,6 +281,47 @@ void fsm_run() {
 			HAL_GPIO_WritePin(LED_GREEN_0_GPIO_Port, LED_GREEN_0_Pin, GPIO_PIN_SET);
 		}
 
+		if (isButton2Pressed() == 1) {
+			setTimer2(500);
+			tempGREEN++;
+			if (tempGREEN >= 100) tempGREEN = 0;
+			state = MODI_4;
+		}
+		break;
+	case MODI_4:
+		updateClockBuffer(0, 4, tempGREEN/10, tempGREEN%10);
+
+		if (timer2_flag == 1) {
+			HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
+			HAL_GPIO_TogglePin(LED_GREEN_0_GPIO_Port, LED_GREEN_0_Pin);
+			setTimer2(500);
+		}
+
+		if (isButton1Pressed() == 1) {
+			setTimer2(500);
+
+			state = RESET;
+
+			HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(LED_RED_0_GPIO_Port, LED_RED_0_Pin, GPIO_PIN_SET);
+
+			HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(LED_YELLOW_0_GPIO_Port, LED_YELLOW_0_Pin, GPIO_PIN_SET);
+
+			HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(LED_GREEN_0_GPIO_Port, LED_GREEN_0_Pin, GPIO_PIN_SET);
+		}
+
+		if (isButton2Pressed() == 1) {
+			setTimer2(500);
+			tempGREEN++;
+			if (tempGREEN >= 100) tempGREEN = 0;
+		}
+
+		if (isButton3Pressed() == 1) {
+			tempGREEN = tempGREEN;
+			state = MODE_4;
+		}
 		break;
 	default:
 		break;
